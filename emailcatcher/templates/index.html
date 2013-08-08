@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<title>Email Catcher</title>
+		<link rel="stylesheet" type="text/css" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">	
+	</head>
+	<body>
+		<h1>EmailCatcher</h1>
+		<table class='table'>
+			<thead>
+				<tr>
+					<th>Recevied</th>
+					<th>Msg</th>
+					<th>headers</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for email in emails %}
+				<tr>
+					<td>{{email.received | datetime }}</td>
+					<td>{{email.msg | truncate(100) }}</td>
+					<td>
+						<select>
+						{% for header in email.headers %}
+							<option>{{header.key}}: {{header.value}}</option>
+						{% endfor %}
+						</select>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>
